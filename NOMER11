@@ -1,0 +1,51 @@
+class Restaurant:
+    def __init__(self, name, type_k):
+        self.restaurant_name = name
+        self.cuisine_type = type_k
+
+    def describe_restaurant(self):
+        print(self.restaurant_name, self.cuisine_type)
+
+class IceCreamStand(Restaurant):
+    def __init__(self, name, type_k, flavors, loc, time):
+        self.restaurant_name = name
+        self.cuisine_type = type_k
+        self.flavors = flavors
+        self.location = loc
+        self.time = time
+        self.stick_ice = []
+        self.soft_ice = []
+
+    def show_flavors(self):
+        print(self.flavors)
+
+    def add_f(self, f):
+        self.flavors.append(f)
+
+    def del_f(self, f):
+        self.flavors.remove(f)
+
+    def check_f(self, f):
+        if f in self.flavors:
+            print("Есть")
+        else:
+            print("Нет")
+
+    def add_stick(self, i):
+        self.stick_ice.append(i)
+
+    def add_soft(self, i):
+        self.soft_ice.append(i)
+
+i = IceCreamStand("Морожка", "Десерт", ["Ваниль", "Шоко"], "Парк", "10-20")
+i.describe_restaurant()
+i.show_flavors()
+
+i.add_f("Клубника")
+i.del_f("Ваниль")
+i.check_f("Шоко")
+
+i.add_stick("Лед")
+i.add_soft("Рожок")
+print(i.stick_ice)
+print(i.soft_ice)
