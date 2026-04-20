@@ -1,0 +1,60 @@
+import json
+
+f = open("products.json", "r", encoding="utf-8")
+data = json.load(f)
+f.close()
+
+for p in data["products"]:
+    print("Название:", p["name"])
+    print("Цена:", p["price"])
+    print("Вес:", p["weight"])
+    if p["available"] == True:
+        print("В наличии")
+    if p["available"] == False:
+        print("Нет в наличии!")
+
+name = input("Название: ")
+price = int(input("Цена: "))
+weight = int(input("Вес: "))
+av = input("В наличии? ")
+
+if av == "да":
+    is_av = True
+else:
+    is_av = False
+
+new_p = {"name": name, "price": price, "weight": weight, "available": is_av}
+data["products"].append(new_p)
+
+f = open("products.json", "w", encoding="utf-8")
+json.dump(data, f, ensure_ascii=False)
+f.close()
+
+ru_en = {}
+f = open("en-ru.txt", "r", encoding="utf-8")
+lines = f.readlines()
+f.close()
+
+for line in lines:
+    line = line.strip()
+    parts = line.split(" - ")
+    en = parts[0]
+    ru_list = parts[1].split(",")
+    for ru in ru_list:
+        ru = ru.strip()
+        if ru not in ru_en:
+            ru_en[ru] = []
+        ru_en[ru].append(en)
+
+f = open("ru-en.txt", "w", encoding="utf-8")
+keys = list(ru_en.keys())
+keys.sort()
+
+for k in keys:
+    eng_words = ru_en[k]
+    eng_words.sort()
+    s = k + " - " + eng_words[0]
+    for i in range(1, len(eng_words)):
+        s = s + ", " + eng_words[i]
+    f.write(s + "\n")
+f.close()
