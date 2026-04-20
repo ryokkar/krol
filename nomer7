@@ -1,0 +1,18 @@
+from PIL import Image, ImageDraw, ImageFont
+
+img = Image.open("postcard.jpg")
+img2 = img.crop((10, 10, 200, 200))
+img2.save("new.jpg")
+
+slovar = {"Новый год": "new_year.jpg", "8 марта": "8.jpg"}
+prazdnik = input("Праздник: ")
+if prazdnik in slovar:
+    imya = input("Имя: ")
+    kartinka = Image.open(slovar[prazdnik])
+    draw = ImageDraw.Draw(kartinka)
+    font = ImageFont.truetype("arial.ttf", 30)
+    text = imya + ", поздравляю!"
+    
+    draw.text((50, 50), text, fill="red", font=font, stroke_width=2, stroke_fill="red")
+    kartinka.show()
+    kartinka.save("final.png")
