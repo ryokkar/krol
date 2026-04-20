@@ -1,0 +1,37 @@
+class Cleaner:
+    def clean(self):
+        print("Идет уборка")
+
+class Restaurant:
+    def __init__(self, name, type_k):
+        self.restaurant_name = name
+        self.cuisine_type = type_k
+        self.rating = 0
+        self.cleaner = Cleaner()
+
+    def describe_restaurant(self):
+        print(self.restaurant_name)
+        print(self.cuisine_type)
+        print(self.rating)
+
+    def open_restaurant(self):
+        print("Открыто")
+
+    def change_rating(self, r):
+        self.rating = r
+
+    def do_clean(self):
+        self.cleaner.clean()
+
+r1 = Restaurant("Мак", "Бургеры")
+r2 = Restaurant("КФС", "Курица")
+r3 = Restaurant("Суши", "Рыба")
+
+r1.describe_restaurant()
+r1.open_restaurant()
+r2.describe_restaurant()
+r3.describe_restaurant()
+
+r1.change_rating(5)
+r1.describe_restaurant()
+r1.do_clean()
